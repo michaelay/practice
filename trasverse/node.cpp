@@ -38,3 +38,9 @@ Node::getChildren()
 {
   return _children; 
 }
+
+void
+Node::accept(VisitorPtr& visitor) 
+{ 
+  visitor->visit(this);
+} 

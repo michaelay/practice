@@ -55,7 +55,10 @@ void dfs(const NodePtr& rootNodePtr)
   while (!stack.empty()) { 
     NodePtr currentNodePtr = stack.top(); 
     stack.pop();
-    std::cout << currentNodePtr->getName() << std::endl; 
+
+    VisitorPtr visitorPtr(new Visitor()); 
+    currentNodePtr->accept(visitorPtr); 
+    //std::cout << currentNodePtr->getName() << std::endl; 
 
     NodeList children = currentNodePtr->getChildren(); 
     for (NodeList::reverse_iterator iter = children.rbegin(); iter != children.rend(); ++iter) 
@@ -74,7 +77,10 @@ void bfs(const NodePtr& rootNodePtr)
   {
     NodePtr currentNodePtr = queue.front(); 
     queue.pop();
-    std::cout << currentNodePtr->getName() << std::endl; 
+
+    VisitorPtr visitorPtr(new Visitor()); 
+    currentNodePtr->accept(visitorPtr); 
+    //std::cout << currentNodePtr->getName() << std::endl; 
 
     NodeList children = currentNodePtr->getChildren(); 
     for (NodeList::iterator iter = children.begin(); iter != children.end(); ++iter) 
