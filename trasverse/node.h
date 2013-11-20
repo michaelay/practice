@@ -26,7 +26,7 @@ public:
   bool addChild(const NodePtr&);
   NodeList& getChildren(); 
 
-  void accept(VisitorPtr&);
+  virtual void accept(VisitorPtr&);
 }; 
 
 #endif
