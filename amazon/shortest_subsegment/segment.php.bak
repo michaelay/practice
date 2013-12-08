@@ -7,8 +7,7 @@ define('EMPTY_OUTPUT', 'NO SUBSEGMENT FOUND');
 // filter other than a-zA-Z, make lower case.
 // $input = strtolower(get_line());
 $input = get_line();
-// $input = preg_replace(array('/[^a-zA-Z ]/', '/ +/'), array('',' '), $input);
-$input = preg_replace(array('/[^a-zA-Z ]/'), array(''), $input);
+$input = preg_replace(array('/[^a-zA-Z ]/', '/ +/'), array('',' '), $input);
 // $input = filter(get_line());
 $input_array = explode(' ', $input);
 // error_log($input);
@@ -45,10 +44,9 @@ foreach($words as $word) {
 	$key = $word_mapping[$word];
 	if (!isset($required_mapping[$key])) {
 		$required_mapping[$key] = 1;
+	} else {
+		$required_mapping[$key]++;
 	}
-	// else {
-	// 	$required_mapping[$key]++;
-	// }
 }
 unset($key);
 unset($word);
@@ -174,10 +172,7 @@ if (!$match_found) {
 } else {
 	// $output_string = "";
 	for ($i=$match_start; $i<$match_end; $i++) {
-		// var_dump($input_array[$i]);
-		if (strlen($input_array[$i]) > 0) {
-			echo $input_array[$i]." ";
-	  }
+		echo $input_array[$i]." ";
 	}
 	unset($i);
 	// $output_string
