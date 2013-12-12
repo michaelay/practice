@@ -77,6 +77,15 @@ class BinarySearcyTreeTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(NULL, $tree->rightChild->rightChild->rightChild);
   }
   // }}}
+
+  public function test_bfs() {
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $result = array();
+    trasverse_bfs($tree, function($node) use ($result) {
+        $result[] = $node->value;
+    });
+    $this->assertEquals(array(5, 3, 8, 2, 4, 7, 9, 1, 6), $result);
+  }
 }
 
 
