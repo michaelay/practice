@@ -10,38 +10,41 @@ class Node {
     $this->rightChild = $right;
     $this->value = $value;
   }
+}
 
-  // preorder
-  public function trasverse_preorder_bfs(closure $callback = NULL) {
-    $queue = array();
-    $queue[] = $this;
+// bfs
+function trasverse_bfs($root, closure $callback = NULL) {
+  $queue = array($root);
 
-    while (!empty($queue)) {
+  while (!empty($queue)) {
 
-      $currentNode = array_shift($queue);
+    $currentNode = array_shift($queue);
 
-      if ($callback) {
-        $callback($currentNode);
-      }
-
-      if ($currentNode->leftChild) {
-        $queue[] = $currentNode->leftChild;
-      }
-
-      if ($currentNode->rightChild) {
-        $queue[] = $currentNode->rightChild;
-      }
-
+    if ($callback) {
+      $callback($currentNode);
     }
-  }
 
-  // inorder
-  public function trasverse_inorder(closure $callback = NULL) {
-  }
+    if ($currentNode->leftChild) {
+      $queue[] = $currentNode->leftChild;
+    }
 
-  // dfs
-  public function trasverse_postorder(closure $callback = NULL) {
+    if ($currentNode->rightChild) {
+      $queue[] = $currentNode->rightChild;
+    }
+
   }
+}
+
+// dfs preorder
+function trasverse_preorder(closure $callback = NULL) {
+}
+
+// dfs in order
+function trasverse_inorder(closure $callback = NULL) {
+}
+
+// dfs post order
+function trasverse_postorder(closure $callback = NULL) {
 }
 
 function create_binary_search_tree(array $numbers) {
@@ -63,9 +66,3 @@ function create_binary_search_tree(array $numbers) {
 
 // $input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // $tree = create_binary_search_tree($input);
-
-// $tree->trasverse_preorder_bfs(function (Node $node) {
-//   echo $node->value."\n";
-// });
-
-//$tree->trasverse_preorder(NULL);
