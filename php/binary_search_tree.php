@@ -61,11 +61,11 @@ function create_binary_search_tree(array $numbers) {
   return new Node($numbers[$root_index], $leftTree, $rightTree);
 }
 
-$input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-$tree = create_binary_search_tree($input);
+// $input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+// $tree = create_binary_search_tree($input);
 
-$tree->trasverse_preorder_bfs(function (Node $node) {
-  echo $node->value."\n";
-});
+// $tree->trasverse_preorder_bfs(function (Node $node) {
+//   echo $node->value."\n";
+// });
 
 //$tree->trasverse_preorder(NULL);
