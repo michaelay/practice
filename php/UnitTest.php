@@ -78,6 +78,11 @@ class BinarySearcyTreeTest extends PHPUnit_Framework_TestCase
   }
   // }}}
 
+  //     5  
+ //   3,     8 
+//  2, 4   7  9 
+// 1      6
+
   public function test_bfs() {
     $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
     $result = array();
@@ -86,6 +91,37 @@ class BinarySearcyTreeTest extends PHPUnit_Framework_TestCase
     });
     $this->assertEquals(array(5, 3, 8, 2, 4, 7, 9, 1, 6), $result);
   }
+
+  // dfs pre order
+  public function test_trasverse_preorder() {
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $result = array();
+    trasverse_preorder($tree, function($node) use (&$result) {
+        $result[] = $node->value;
+    });
+    $this->assertEquals(array(5, 3, 2, 1, 4, 8, 7, 6, 9), $result);
+  }
+
+  // dfs in order
+  public function test_trasverse_inorder() {
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $result = array();
+    trasverse_inorder($tree, function($node) use (&$result) {
+        $result[] = $node->value;
+    });
+    $this->assertEquals(array(1, 2, 3, 4, 5, 6, 7, 8, 9), $result);
+  }
+
+  // dfs post order
+  public function test_trasverse_postorder() { 
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $result = array();
+    trasverse_postorder($tree, function($node) use (&$result) {
+        $result[] = $node->value;
+    });
+    $this->assertEquals(array(1, 2, 4, 3, 6, 7, 9, 8, 5), $result);
+  }
+
 }
 
 

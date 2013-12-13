@@ -36,15 +36,49 @@ function trasverse_bfs($root, closure $callback = NULL) {
 }
 
 // dfs preorder
-function trasverse_preorder(closure $callback = NULL) {
+function trasverse_preorder($root, closure $callback = NULL) {
+  if ($root == NULL) { 
+    return; 
+  }
+
+  // visit current node 
+  if ($callback) {
+    $callback($root);
+  }
+
+  trasverse_preorder($root->leftChild, $callback); 
+  trasverse_preorder($root->rightChild, $callback); 
 }
 
 // dfs in order
-function trasverse_inorder(closure $callback = NULL) {
+function trasverse_inorder($root, closure $callback = NULL) {
+  if ($root == NULL) { 
+    return; 
+  }
+
+  trasverse_inorder($root->leftChild, $callback); 
+
+  // visit current node 
+  if ($callback) {
+    $callback($root);
+  }
+
+  trasverse_inorder($root->rightChild, $callback); 
 }
 
 // dfs post order
-function trasverse_postorder(closure $callback = NULL) {
+function trasverse_postorder($root, closure $callback = NULL) {
+  if ($root == NULL) { 
+    return; 
+  }
+
+  trasverse_postorder($root->leftChild, $callback); 
+  trasverse_postorder($root->rightChild, $callback); 
+
+  // visit current node 
+  if ($callback) {
+    $callback($root);
+  }
 }
 
 function create_binary_search_tree(array $numbers) {
