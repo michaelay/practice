@@ -128,11 +128,51 @@ function bst_find($root, $needle) {
   return $root;
 }
 
-function bst_find_inorder_successor($root, $needle) {
+function bst_find_inorder_successor($root, $node) {
+  if ($node == NULL) { 
+    return NULL;
+  }
 
+  if ($node->rightChild !== NULL) { 
+    return bst_find_leftmost($node->rightChild); 
+  } 
+
+  $successor_node = NULL;
+  while ($root != NULL) { 
+    if ($node->value < $root->value) { 
+      $successor_node = $root; 
+      $root = $root->leftChild; 
+    } else if ($node->value > $root->value) { 
+      $root = $root->rightChild;
+    } else { 
+      break;
+    }
+  }
+  return $successor_node;
 }
 
-function bst_find_inorder_predecessor($root, $needle) { 
+function bst_find_inorder_predecessor($root, $node) { 
+  if ($node == NULL) { 
+    return NULL;
+  }
+
+  if ($node->leftChild !== NULL) { 
+    return bst_find_rightmost($node->leftChild); 
+  } 
+
+  $predecessor_node = NULL;
+  while ($root != NULL) { 
+    if ($node->value < $root->value) { 
+      $root = $root->leftChild; 
+    } else if ($node->value > $root->value) { 
+      $predecessor_node = $root;
+      $root = $root->rightChild; 
+    } else {
+      break; 
+    }
+  }
+  
+  return $predecessor_node;
 }
 // $input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // $tree = create_binary_search_tree($input);
