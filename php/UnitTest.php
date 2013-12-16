@@ -122,6 +122,94 @@ class BinarySearcyTreeTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(array(1, 2, 4, 3, 6, 7, 9, 8, 5), $result);
   }
 
+  public function test_find() { 
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $node2 = bst_find($tree, 2); 
+    $node8 = bst_find($tree, 8); 
+    
+    $this->assertEquals(NULL, bst_find($tree, 5.5)); 
+    $this->assertEquals(NULL, bst_find($tree, -1)); 
+    $this->assertEquals(NULL, bst_find($tree, 100)); 
+
+    $result = array(); 
+    trasverse_bfs($node2, function($node) use (&$result) { 
+        $result[] = $node->value;
+    }); 
+    $this->assertEquals(array(2, 1), $result); 
+
+    $result = array(); 
+    trasverse_bfs($node8, function($node) use (&$result) { 
+        $result[] = $node->value;
+    }); 
+    $this->assertEquals(array(8, 7, 9, 6), $result); 
+
+    $this->assertEquals(NULL, bst_find(NULL, 1)); 
+  }
+
+  public function test_bst_find_leftmost() { 
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $this->assertEquals(1, bst_find_leftmost($tree)->value); 
+  }
+
+  public function test_bst_find_rightmost() {
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $this->assertEquals(9, bst_find_rightmost($tree)->value); 
+
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    $this->assertEquals(10, bst_find_rightmost($tree)->value); 
+  }
+
+  // bst_find_inorder_next  
+  public function test_bst_find_inorder_successor() { 
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $this->bsd_find_inorder_successor($tree, 0, true, 1);
+    $this->bsd_find_inorder_successor($tree, 1, true, 2);
+    $this->bsd_find_inorder_successor($tree, 2, true, 3);
+    $this->bsd_find_inorder_successor($tree, 3, true, 4);
+    $this->bsd_find_inorder_successor($tree, 4, true, 5);
+    $this->bsd_find_inorder_successor($tree, 5, true, 6);
+    $this->bsd_find_inorder_successor($tree, 6, true, 7);
+    $this->bsd_find_inorder_successor($tree, 7, true, 8);
+    $this->bsd_find_inorder_successor($tree, 8, true, 9);
+    $this->bsd_find_inorder_successor($tree, 9, false, NULL);
+    $this->bsd_find_inorder_successor($tree, 10, false, NULL);
+
+    $tree = create_binary_search_tree(array());
+    $this->bsd_find_inorder_successor($tree, 0, false, NULL);
+
+    $this->bsd_find_inorder_successor(NULL, 0, false, NULL);
+  }
+
+  // just to save some typing. don't do this in production code, no decoupling. depends on tree value structure
+  private function bsd_find_inorder_successor($tree, $needle, $value) { 
+    $this->assertEquals($value, bst_find_inorder_successor($tree, $needle)->value); 
+  }
+
+  // bst_find_inorder_previous 
+  public function test_bsd_find_inorder_predecessor() {     
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $this->bsd_find_inorder_predecessor($tree, 0, false, NULL);
+    $this->bsd_find_inorder_predecessor($tree, 1, false, NULL);
+    $this->bsd_find_inorder_predecessor($tree, 2, true, 1);
+    $this->bsd_find_inorder_predecessor($tree, 3, true, 2);
+    $this->bsd_find_inorder_predecessor($tree, 4, true, 3);
+    $this->bsd_find_inorder_predecessor($tree, 5, true, 4);
+    $this->bsd_find_inorder_predecessor($tree, 6, true, 5);
+    $this->bsd_find_inorder_predecessor($tree, 7, true, 6);
+    $this->bsd_find_inorder_predecessor($tree, 8, true, 7);
+    $this->bsd_find_inorder_predecessor($tree, 9, true, 8);
+    $this->bsd_find_inorder_predecessor($tree, 10, true, 9);
+
+    $tree = create_binary_search_tree(array());
+    $this->bsd_find_inorder_predecessor($tree, 3, false, NULL);
+    $this->bsd_find_inorder_predecessor(NULL, 2, false, NULL);
+  }
+
+  // just to save some typing. don't do this in production code, no decoupling. depends on tree value structure
+  private function bsd_find_inorder_predecessor($tree, $needle, $value) { 
+    $this->assertEquals($value, bst_find_inorder_predecessor($tree, $needle)->value); 
+  }
+
 }
 
 

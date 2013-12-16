@@ -98,5 +98,41 @@ function create_binary_search_tree(array $numbers) {
   return new Node($numbers[$root_index], $leftTree, $rightTree);
 }
 
+// return node if found, NULL otherwise 
+function bst_find_leftmost($root) { 
+  while ($root->leftChild != NULL) { 
+    $root = $root->leftChild; 
+  }
+  return $root; 
+}
+
+function bst_find_rightmost($root) { 
+  while ($root->rightChild != NULL) { 
+    $root = $root->rightChild; 
+  }
+  return $root; 
+}
+
+function bst_find($root, $needle) { 
+  while ($root != NULL) { 
+    if ($root->value == $needle) { 
+      return $root;
+    }
+
+    if ($needle > $root->value) {
+      $root = $root->rightChild; 
+    } else { 
+      $root = $root->leftChild; 
+    }
+  }
+  return $root;
+}
+
+function bst_find_inorder_successor($root, $needle) {
+
+}
+
+function bst_find_inorder_predecessor($root, $needle) { 
+}
 // $input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // $tree = create_binary_search_tree($input);
