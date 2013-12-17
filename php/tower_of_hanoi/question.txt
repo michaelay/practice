@@ -1,0 +1,85 @@
+Consider the folowing variation of the well know problem Towers of Hanoi:
+
+We are given n towers and m disks of sizes 1,2,3,...,m stacked on some towers. Your objective is to transfer all the disks to the k-th tower in as few moves as you can manage, but taking into account the following rules:
+
+moving only one disk at a time,
+never moving a larger disk one onto a smaller one,
+moving only between towers at distance at most d.
+You can assume that all the problems can be solved in not more than 20000 moves.
+
+Input
+
+The first line of input contains a single positive integer t <= 1000, the number of test cases.
+
+Each tests case begins with the number of towers 3 <= n <= 100, the number of target tower 1 <= k <= n, the number of disks m <= 100 and the maximum distance 1 <= d <= n - 1. 
+
+Then, the following m lines consists of pairs of numbers describing the initial situation, in the form: the tower and disk on it. Assume according to the rules that on every tower smaller disks are on larger disks.
+
+Output
+
+Process all test cases. The correct output for the i-th test case takes the following form: 
+i [the number of the test case (in input order)] 
+a b [a sequence of lines of this form, where a is the tower with the moved disk on top of it and b is the target tower].
+The test case is considered solved if after performing the sequence all disks are on the k-th tower. At the end of the series of moves you should always write a line consisting of two zeros ('0 0'). 
+Scoring
+
+The score awarded to your program is the sum of scores for individual test cases. For the i-th test case you will receive Ti / ( Ti + Ai) points, where Ti <= 20000 and Ai is the number of moves in your solution. If you don't want to solve a test case, you may output the line '0 0' without a list of moves, for which you will not be awarded any points. Your program may not write more than 30000 kB to output (this will result in SIGXFSZ).
+
+Example
+
+Input
+5
+3 3 3 2
+1 1
+1 2
+1 3
+3 1 3 2
+1 1
+1 2
+1 3
+4 4 4 2
+1 1
+1 2
+1 3
+1 4
+4 4 4 2
+1 1
+1 2
+2 4
+4 3
+4 4 4 3
+1 1
+4 2
+4 3
+4 4
+
+Output
+1
+1 3
+1 2
+3 2
+1 3
+2 1
+2 3
+1 3
+0 0
+2
+0 0
+3
+0 0
+4
+4 3
+2 4
+3 4
+1 2
+1 3
+3 4
+2 4
+0 0
+5
+1 2
+0 0
+
+Score
+Assuming: T = {7,6,15,7,1} the output will receive 2 points. 
+Bonus info: If score = xxx.xxxaaa, aaa means the number of test cases with non-zero score...
