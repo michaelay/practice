@@ -212,6 +212,30 @@ class BinarySearcyTreeTest extends PHPUnit_Framework_TestCase
     $this->assertEquals($value, bst_find_inorder_predecessor($tree, $node)->value); 
   }
 
+  public function test_bst_add() { 
+    $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    $ret = bst_add($tree, 0); 
+    $this->assertTrue($ret); 
+    $ret = bst_add($tree, 1);
+    $this->assertTrue($ret); 
+    $ret = bst_add($tree, 4); 
+    $this->assertTrue($ret); 
+    $ret = bst_add($tree, 8); 
+    $this->assertTrue($ret); 
+    $ret = bst_add($tree, 9); 
+    $this->assertTrue($ret); 
+    $ret = bst_add($tree, 100); 
+    $this->assertTrue($ret); 
+  }
+
+  public function test_bst_delete() { 
+    // $tree = create_binary_search_tree(array(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+
+    // $tree = NULL;
+    // $this->assertFalse(bst_delete($tree, NULL));
+  }
+
 }
 
 

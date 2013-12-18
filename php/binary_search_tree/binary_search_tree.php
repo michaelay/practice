@@ -14,22 +14,23 @@ class Node {
 
 // bfs
 function trasverse_bfs($root, closure $callback = NULL) {
-  $queue = array($root);
+  $queue = new SplQueue(); 
+  $queue->enqueue($root); 
 
-  while (!empty($queue)) {
+  while (!$queue->isEmpty()) {
 
-    $currentNode = array_shift($queue);
+    $currentNode = $queue->dequeue();
 
     if ($callback) {
       $callback($currentNode);
     }
 
     if ($currentNode->leftChild) {
-      $queue[] = $currentNode->leftChild;
+      $queue->enqueue($currentNode->leftChild);
     }
 
     if ($currentNode->rightChild) {
-      $queue[] = $currentNode->rightChild;
+      $queue->enqueue($currentNode->rightChild);
     }
 
   }
@@ -173,6 +174,20 @@ function bst_find_inorder_predecessor($root, $node) {
   }
   
   return $predecessor_node;
+}
+
+/**
+ * return true on success, false otherwise
+ */
+function bst_add($root, $node) { 
+  return true;
+}
+
+/**
+ * return true on success, false otherwise
+ */
+function bst_delete($root, $node) { 
+  return true;
 }
 // $input = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 // $tree = create_binary_search_tree($input);
